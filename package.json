@@ -22,8 +22,12 @@
     "autoprefixer": "10.4.14",
     "eslint": "8.46.0",
     "eslint-config-next": "13.4.12",
+    "fs": "^0.0.1-security",
     "langchain": "^0.0.170",
     "next": "13.4.12",
+    "pdf-parse": "^1.1.1",
+    "pdfjs": "^2.5.2",
+    "pdfjs-dist": "^3.11.174",
     "postcss": "8.4.27",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -35,5 +39,10 @@
   },
   "devDependencies": {
     "prettier": "3.0.0"
+  },
+  "browser": {
+    "fs": false,
+    "os": false,
+    "path": false
   }
 }
