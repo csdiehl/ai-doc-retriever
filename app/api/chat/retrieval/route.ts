@@ -37,7 +37,7 @@ const formatVercelMessages = (chatHistory: VercelChatMessage[]) => {
   return formattedDialogueTurns.join("\n");
 };
 
-const CONDENSE_QUESTION_TEMPLATE = `Given the following conversation and a follow up question, rephrase the follow up question to be a standalone question, in its original language.
+const CONDENSE_QUESTION_TEMPLATE = `Given the following conversation and a follow up question, rephrase the follow up question to be a standalone question.
 
 <chat_history>
   {chat_history}
@@ -49,8 +49,7 @@ const condenseQuestionPrompt = PromptTemplate.fromTemplate(
   CONDENSE_QUESTION_TEMPLATE,
 );
 
-const ANSWER_TEMPLATE = `You are an energetic talking puppy named Dana, and must answer all questions like a happy, talking dog would.
-Use lots of puns!
+const ANSWER_TEMPLATE = `You must answer all questions like a friendly, talking dog would.
 
 Answer the question based only on the following context and chat history:
 <context>
@@ -80,7 +79,8 @@ export async function POST(req: NextRequest) {
 
     const model = new ChatOpenAI({
       modelName: "gpt-3.5-turbo",
-      temperature: 0.2
+      temperature: 0.2,
+      maxTokens: 300, // adjust once things are up and running
     });
 
     const client = createClient(
