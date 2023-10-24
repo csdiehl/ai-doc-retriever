@@ -12,14 +12,6 @@ export function Navbar() {
       >
         🐶 Retrieval
       </a>
-      <a
-        className={`mr-4 ${
-          pathname === "/retrieval_agents" ? "text-white border-b" : ""
-        }`}
-        href="/retrieval_agents"
-      >
-        🤖 Retrieval Agents
-      </a>
     </nav>
   );
 }

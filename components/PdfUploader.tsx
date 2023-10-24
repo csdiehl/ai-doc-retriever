@@ -8,6 +8,8 @@ const PdfUploader = () => {
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState("load your document");
 
+  console.log(documents);
+
   async function handleFileChange(e: any) {
     let selectedFile = e.target.files[0];
     console.log(selectedFile);
@@ -16,7 +18,7 @@ const PdfUploader = () => {
       const loader = new WebPDFLoader(blob, { splitPages: true });
       const docs = await loader.load();
 
-      setDocuments({ docs });
+      setDocuments(docs);
     }
   }
 
