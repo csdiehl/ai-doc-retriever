@@ -2,20 +2,17 @@
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 import { useChat } from "ai/react";
 import { useRef, useState, ReactElement } from "react";
 import type { FormEvent } from "react";
 import type { AgentStep } from "langchain/schema";
-
 import { ChatMessageBubble } from "@/components/ChatMessageBubble";
-import { UploadDocumentsForm } from "@/components/UploadDocumentsForm";
 import { IntermediateStep } from "./IntermediateStep";
 import PdfUploader from "./PdfUploader";
+import InfoCard from "./InfoCard";
 
 export function ChatWindow(props: {
   endpoint: string;
-  emptyStateComponent: ReactElement;
   placeholder?: string;
   titleText?: string;
   emoji?: string;
@@ -26,7 +23,6 @@ export function ChatWindow(props: {
 
   const {
     endpoint,
-    emptyStateComponent,
     placeholder,
     titleText = "An LLM",
     showIngestForm,
@@ -37,12 +33,7 @@ export function ChatWindow(props: {
   const [showIntermediateSteps, setShowIntermediateSteps] = useState(false);
   const [intermediateStepsLoading, setIntermediateStepsLoading] =
     useState(false);
-  const ingestForm = showIngestForm && (
-    <>
-      <PdfUploader />
-      <UploadDocumentsForm></UploadDocumentsForm>;
-    </>
-  );
+  const ingestForm = showIngestForm && <PdfUploader />;
   const intemediateStepsToggle = showIntermediateStepsToggle && (
     <div>
       <input
@@ -169,7 +160,7 @@ export function ChatWindow(props: {
       <h2 className={`${messages.length > 0 ? "" : "hidden"} text-2xl`}>
         {emoji} {titleText}
       </h2>
-      {messages.length === 0 ? emptyStateComponent : ""}
+      <InfoCard />
       <div
         className="flex flex-col-reverse w-full mb-4 overflow-auto transition-[flex-grow] ease-in-out"
         ref={messageContainerRef}

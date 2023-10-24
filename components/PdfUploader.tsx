@@ -8,8 +8,6 @@ const PdfUploader = () => {
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState("load your document");
 
-  console.log(documents);
-
   async function handleFileChange(e: any) {
     let selectedFile = e.target.files[0];
     console.log(selectedFile);
@@ -51,7 +49,7 @@ const PdfUploader = () => {
       <p>{status}</p>
       <input
         onChange={handleFileChange}
-        className="grow mr-8 p-4 rounded"
+        className="grow mr-8 p-4 rounded bg-slate-100"
         type="file"
       ></input>
       <button
