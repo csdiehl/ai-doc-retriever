@@ -5,10 +5,13 @@ import { WebPDFLoader } from "langchain/document_loaders/web/pdf";
 
 async function parsePDF(fileInput: any) {
   const blob = new Blob([fileInput], { type: "application/pdf" }); // e.g. from a file input
-  const loader = new WebPDFLoader(blob);
+  const loader = new WebPDFLoader(blob, { splitPages: false });
   const docs = await loader.load();
+  const content = docs[0]?.pageContent;
 
-  console.log({ docs });
+  if (content) {
+    console.log({ content });
+  }
 }
 
 const PdfUploader = () => {
