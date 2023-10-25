@@ -3,6 +3,10 @@
 import React, { useState, useRef, type FormEvent } from "react";
 import { WebPDFLoader } from "langchain/document_loaders/web/pdf";
 
+const uid = function () {
+  return Date.now().toString(36) + Math.random().toString(36).substring(2);
+};
+
 const PdfUploader = () => {
   const [documents, setDocuments] = useState<any>(null);
   const [loading, setLoading] = useState(false);
@@ -28,12 +32,14 @@ const PdfUploader = () => {
       return;
     }
     setLoading(true);
+
     const response = await fetch("/api/retrieval/ingest-pdf", {
       method: "POST",
       body: JSON.stringify({
         documents: documents,
         metadata: {
-          name: nameRef.current.value ?? "unknown",
+          id: uid(),
+          name: nameRef.current.value || "unknown",
           pages: documents.length,
         },
       }),

@@ -24,9 +24,12 @@ export function ChatMessageBubble(props: {
         <span>{props.message.content}</span>
         {props.message.role === "assistant" && (
           <CopyToClipboard
-            text={props.message.content}
+            text={`${props.message.content}\n\n Found on pages: ${props.sources
+              .map((source) => source.metadata?.loc?.pageNumber)
+              .join(",")}`}
             onCopy={() => setCopied(true)}
           >
+            {/*@ts-ignore*/}
             <button className="border-slate-700 rounded w-[100px] bg-slate-600">
               {copied ? "Copied!" : "Copy this Answer"}
             </button>

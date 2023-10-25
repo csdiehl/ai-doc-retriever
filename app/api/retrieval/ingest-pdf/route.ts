@@ -19,7 +19,10 @@ export async function POST(req: NextRequest) {
   const body = await req.json();
   const documents = body.documents;
 
-  const { name, pages } = body.metadata;
+  const { name, pages, id } = body.metadata;
+
+  // attach an id for the whole PDF that was uploaded
+  documents.forEach((d) => (d.metadata["doc_id"] = id));
 
   try {
     const client = createClient(
@@ -29,7 +32,7 @@ export async function POST(req: NextRequest) {
 
     const { error } = await client
       .from("documentInfo")
-      .insert({ name: name, pages: pages });
+      .insert({ name: name, pages: pages, doc_id: id });
 
     const vectorstore = await SupabaseVectorStore.fromDocuments(
       documents,
