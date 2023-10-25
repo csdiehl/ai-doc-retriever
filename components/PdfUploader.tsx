@@ -54,10 +54,15 @@ const PdfUploader = () => {
       <p>{status}</p>
       <input
         onChange={handleFileChange}
-        className="grow mr-8 p-4 rounded bg-slate-100"
+        className="grow mr-8 p-4 rounded bg-[#25252d] text-white"
         type="file"
       ></input>
-      <input ref={nameRef} type="text" placeholder="Document name"></input>
+      <input
+        className="grow mr-8 p-4 rounded bg-[#25252d] text-white"
+        ref={nameRef}
+        type="text"
+        placeholder="Document name"
+      ></input>
       <button
         type="submit"
         className="shrink-0 px-8 py-4 bg-sky-600 rounded w-28"
