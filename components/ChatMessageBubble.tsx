@@ -47,6 +47,7 @@ export function ChatMessageBubble(props: {
                     <div>
                       {i + 1}.Found on{" "}
                       <strong>page {source.metadata?.loc?.pageNumber}:</strong>{" "}
+                      in <strong>{source.metadata?.doc_id}</strong>
                       &quot;
                       {source.pageContent}&quot;
                       <br />
