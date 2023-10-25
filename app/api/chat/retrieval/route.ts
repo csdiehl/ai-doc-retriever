@@ -49,7 +49,7 @@ const condenseQuestionPrompt = PromptTemplate.fromTemplate(
   CONDENSE_QUESTION_TEMPLATE,
 );
 
-const ANSWER_TEMPLATE = `You must answer all questions like a friendly, talking dog would.
+const ANSWER_TEMPLATE = `You are an investigative journalist. You must answer all questions as truthfully and factually as possible. 
 
 Answer the question based only on the following context and chat history:
 <context>
