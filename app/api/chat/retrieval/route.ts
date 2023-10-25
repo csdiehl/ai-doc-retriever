@@ -80,7 +80,7 @@ export async function POST(req: NextRequest) {
     const model = new ChatOpenAI({
       modelName: "gpt-3.5-turbo",
       temperature: 0.2,
-      maxTokens: 300, // adjust once things are up and running
+      maxTokens: 500, // adjust once things are up and running
     });
 
     const client = createClient(
