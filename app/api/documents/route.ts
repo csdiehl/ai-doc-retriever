@@ -7,7 +7,7 @@ export async function GET() {
     process.env.SUPABASE_PRIVATE_KEY!,
   );
 
-  const { data, error } = await client.from("documents").select("metadata");
+  const { data, error } = await client.from("documentInfo").select();
 
   if (data) {
     return NextResponse.json(data);

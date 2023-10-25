@@ -1,12 +1,13 @@
 "use client";
 
-import React, { useState, type FormEvent } from "react";
+import React, { useState, useRef, type FormEvent } from "react";
 import { WebPDFLoader } from "langchain/document_loaders/web/pdf";
 
 const PdfUploader = () => {
   const [documents, setDocuments] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState("load your document");
+  const nameRef = useRef<HTMLInputElement>(null);
 
   async function handleFileChange(e: any) {
     let selectedFile = e.target.files[0];
@@ -31,6 +32,10 @@ const PdfUploader = () => {
       method: "POST",
       body: JSON.stringify({
         documents: documents,
+        metadata: {
+          name: nameRef.current.value ?? "unknown",
+          pages: documents.length,
+        },
       }),
     });
     if (response.status === 200) {
@@ -52,6 +57,7 @@ const PdfUploader = () => {
         className="grow mr-8 p-4 rounded bg-slate-100"
         type="file"
       ></input>
+      <input ref={nameRef} type="text" placeholder="Document name"></input>
       <button
         type="submit"
         className="shrink-0 px-8 py-4 bg-sky-600 rounded w-28"

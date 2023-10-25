@@ -19,11 +19,17 @@ export async function POST(req: NextRequest) {
   const body = await req.json();
   const documents = body.documents;
 
+  const { name, pages } = body.metadata;
+
   try {
     const client = createClient(
       process.env.SUPABASE_URL!,
       process.env.SUPABASE_PRIVATE_KEY!,
     );
+
+    const { error } = await client
+      .from("documentInfo")
+      .insert({ name: name, pages: pages });
 
     const vectorstore = await SupabaseVectorStore.fromDocuments(
       documents,
